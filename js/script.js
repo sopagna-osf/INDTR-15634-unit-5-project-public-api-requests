@@ -116,22 +116,29 @@ function addSearchComponent() {
     $searchComponent.find('#search-input').on('keyup', e => {
         const value = $(e.target).val() || '';
         const regExp = new RegExp(value, 'ig');
+        let found = 0;
 
+        $gallery.find('#not-found').remove();
         $gallery.find('.card').each((index, card) => {
             const $card = $(card);
             const name = $card.find('#name').text();
            
             if (regExp.test(name)) {
                 $card.show();
+                found++;
             } else {
                 $card.hide();
             }
         });
+
+        if (found == 0) {
+            $gallery.append('<p id="not-found">Not found!</p>');
+        }
     });
 
     $searchComponent.find('#serach-submit').on('click', e => {
         e.preventDefault();
-        $searchComponent.find('#search-input').trigger('click');
+        $searchComponent.find('#search-input').trigger('keyup');
     });
 
     $('.search-container').append($searchComponent);
