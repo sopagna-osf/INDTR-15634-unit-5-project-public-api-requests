@@ -132,7 +132,7 @@ function addSearchComponent() {
         });
 
         if (found == 0) {
-            $gallery.append('<p id="not-found">Not found!</p>');
+            $gallery.append('<p id="not-found">No results found!</p>');
         }
     });
 
